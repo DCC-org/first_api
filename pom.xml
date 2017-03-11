@@ -68,6 +68,11 @@
 		    <artifactId>spring-web</artifactId>
 		    <version>4.3.6.RELEASE</version>
 		</dependency>
+		<dependency>
+		    <groupId>io.swagger</groupId>
+		    <artifactId>swagger-core</artifactId>
+		    <version>1.5.12</version>
+		</dependency>
 	</dependencies>
 
 	<build>

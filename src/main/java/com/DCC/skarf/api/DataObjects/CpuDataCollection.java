@@ -2,6 +2,8 @@ package com.DCC.skarf.api.DataObjects;
 
 import java.util.ArrayList;
 
+
+//Outdated
 public class CpuDataCollection {
 	
 	private ArrayList<CpuData> datacollection = new ArrayList<CpuData>();
