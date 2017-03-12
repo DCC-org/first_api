@@ -14,7 +14,7 @@ public class GrafanaQueryRequest {
 	private int panelId;
 	
 	@ApiModelProperty(required = true, name = "range", position = 2)
-	private GrafanaQueryRange range = new GrafanaQueryRange(); 
+	private GrafanaQueryRange range = new GrafanaQueryRange();
 	
 	@ApiModelProperty(required = true, name = "rangeRaw", position = 3)
 	private GrafanaQueryRangeRaw rangeRaw = new GrafanaQueryRangeRaw();

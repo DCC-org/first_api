@@ -13,6 +13,12 @@ public class GrafanaQueryTargets {
 	@ApiModelProperty(value = "A", required = true, example = "A", position = 2)
 	private String refId;
 	
+	@ApiModelProperty(value = "timeserie", required = true, example = "timeserie", position = 3)
+	private String type;
+	
+	@ApiModelProperty(value = "false", required = true, example = "false", position = 3)
+	private boolean hide;
+	
 	public void setTarget (String s) {
 		this.target = s;
 	}
@@ -27,6 +33,22 @@ public class GrafanaQueryTargets {
 	
 	public String getRefId () {
 		return this.refId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public boolean isHide() {
+		return hide;
+	}
+
+	public void setHide(boolean hide) {
+		this.hide = hide;
 	}
 
 }

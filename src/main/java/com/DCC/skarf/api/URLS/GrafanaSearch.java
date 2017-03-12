@@ -14,7 +14,7 @@ import com.DCC.skarf.api.Grafana.Response.DataObjects.Search.GrafanaSearchRespon
 public class GrafanaSearch {
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = "application/json; charset=UTF-8")
-	public @ResponseBody String[] runQuery(@RequestBody GrafanaSearchRequest jsonString) {
+	public @ResponseBody String[] runSearch(@RequestBody GrafanaSearchRequest jsonString) {
 		return new GrafanaSearchResponse().getDatapoints();
 	}
 
