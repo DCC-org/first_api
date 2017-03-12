@@ -7,13 +7,13 @@ import io.swagger.annotations.ApiModelProperty;
 		value = "range.")
 public class GrafanaQueryRange {
 	
-	@ApiModelProperty(value = "2016-10-31T06:33:44.866Z", required = true, example = "2016-10-31T06:33:44.866Z")
+	@ApiModelProperty(value = "2016-10-31T06:33:44.866Z", required = true, example = "2016-10-31T06:33:44.866Z", position = 1)
 	private String from;
 	
-	@ApiModelProperty(value = "2016-10-31T12:33:44.866Z", required = true, example = "2016-10-31T12:33:44.866Z")
+	@ApiModelProperty(value = "2016-10-31T12:33:44.866Z", required = true, example = "2016-10-31T12:33:44.866Z", position = 2)
 	private String to;
 	
-	@ApiModelProperty(required = true)
+	@ApiModelProperty(required = true, name = "raw", position = 3)
 	private GrafanaQueryRangeRaw raw = new GrafanaQueryRangeRaw();
 	
 	public String getFrom() {
@@ -24,7 +24,7 @@ public class GrafanaQueryRange {
 		return this.to;
 	}
 	
-	public GrafanaQueryRangeRaw getGrafanaQueryRangeRaw() {
+	public GrafanaQueryRangeRaw getRaw() {
 		return this.raw;
 	}
 	
@@ -36,7 +36,7 @@ public class GrafanaQueryRange {
 		this.to = s;
 	}
 	
-	public void setGrafanaQueryRangeRaw(GrafanaQueryRangeRaw r) {
+	public void setRaw(GrafanaQueryRangeRaw r) {
 		this.raw = r;
 	}
 
