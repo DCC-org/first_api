@@ -1,4 +1,4 @@
-package com.DCC.skarf.api.DataObjects.Grafana.Query;
+package com.DCC.skarf.api.Grafana.Request.DataObjects.Query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

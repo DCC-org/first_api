@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.DCC.skarf.api.DataObjects.Text;
-import com.DCC.skarf.api.DataObjects.Grafana.Query.GrafanaQueryRequest;
+import com.DCC.skarf.api.Grafana.Request.DataObjects.Query.GrafanaQueryRequest;
 
 @Controller
 @RequestMapping("/query")

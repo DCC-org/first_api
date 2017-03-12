@@ -1,4 +1,4 @@
-package com.DCC.skarf.api.DataObjects.Grafana.Query;
+package com.DCC.skarf.api.Grafana.Request.DataObjects.Query;
 
 import java.util.ArrayList;
 import java.util.List;
