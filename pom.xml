@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.DCC.skarf.api</groupId>
-	<artifactId>basic</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>DCC_API</artifactId>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>first_api</name>
