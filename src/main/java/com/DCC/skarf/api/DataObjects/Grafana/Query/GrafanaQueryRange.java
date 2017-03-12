@@ -13,6 +13,9 @@ public class GrafanaQueryRange {
 	@ApiModelProperty(value = "2016-10-31T12:33:44.866Z", required = true, example = "2016-10-31T12:33:44.866Z")
 	private String to;
 	
+	@ApiModelProperty(required = true)
+	private GrafanaQueryRangeRaw raw = new GrafanaQueryRangeRaw();
+	
 	public String getFrom() {
 		return this.from;
 	}
@@ -21,12 +24,20 @@ public class GrafanaQueryRange {
 		return this.to;
 	}
 	
+	public GrafanaQueryRangeRaw getGrafanaQueryRangeRaw() {
+		return this.raw;
+	}
+	
 	public void setFrom(String s) {
 		this.from = s;
 	}
 	
 	public void setTo(String s) {
 		this.to = s;
+	}
+	
+	public void setGrafanaQueryRangeRaw(GrafanaQueryRangeRaw r) {
+		this.raw = r;
 	}
 
 }
