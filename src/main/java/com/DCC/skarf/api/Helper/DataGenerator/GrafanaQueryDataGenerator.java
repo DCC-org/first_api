@@ -25,7 +25,7 @@ public class GrafanaQueryDataGenerator {
 			oneResponse.setTarget(target.getTarget());
 			
 			//Get sample DataPoint amount as requested
-			long baseTime = System.currentTimeMillis();
+			long baseTime = (System.currentTimeMillis() - 100000000);
 			baseTime = baseTime - (baseTime%1000);
 			List<long[]> datapoints = new ArrayList<long[]>();
 			for (int i = 1; i <= input.getMaxDataPoints(); i++) {
