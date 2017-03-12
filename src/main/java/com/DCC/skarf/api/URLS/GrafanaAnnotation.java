@@ -12,12 +12,15 @@ import com.DCC.skarf.api.Grafana.Request.DataObjects.Annotation.GrafanaAnnotatio
 import com.DCC.skarf.api.Grafana.Response.DataObjects.Annotation.GrafanaAnnotationResponse;
 import com.DCC.skarf.api.Helper.DataGenerator.GrafanaAnnotationDataGenerator;
 
+import io.swagger.util.Json;
+
 @Controller
 @RequestMapping("/annotations")
 public class GrafanaAnnotation {
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = "application/json; charset=UTF-8")
 	public @ResponseBody List<GrafanaAnnotationResponse> runAnnotations(@RequestBody GrafanaAnnotationRequest jsonString) {
+		System.out.println(Json.pretty(jsonString));
 		return new GrafanaAnnotationDataGenerator(jsonString.getAnnotation()).getResponseList();
 	}
 

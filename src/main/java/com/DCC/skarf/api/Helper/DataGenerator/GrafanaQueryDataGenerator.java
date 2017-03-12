@@ -1,6 +1,7 @@
 package com.DCC.skarf.api.Helper.DataGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,11 +26,13 @@ public class GrafanaQueryDataGenerator {
 			
 			//Get sample DataPoint amount as requested
 			long baseTime = System.currentTimeMillis();
+			baseTime = baseTime - (baseTime%1000);
 			List<long[]> datapoints = new ArrayList<long[]>();
 			for (int i = 1; i <= input.getMaxDataPoints(); i++) {
 				datapoints.add(new long[] {(long) ThreadLocalRandom.current().nextInt(0, 301), baseTime});
-				baseTime = baseTime - 1000;
+				baseTime = baseTime - 50000;
 			}
+			Collections.reverse(datapoints);
 			oneResponse.setDatapoints(datapoints);
 			
 			//Adding the response to ArrayList for output
