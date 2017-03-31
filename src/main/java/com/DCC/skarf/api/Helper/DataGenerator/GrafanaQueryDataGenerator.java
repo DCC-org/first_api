@@ -30,7 +30,7 @@ public class GrafanaQueryDataGenerator {
 			List<long[]> datapoints = new ArrayList<long[]>();
 			for (int i = 1; i <= input.getMaxDataPoints(); i++) {
 				datapoints.add(new long[] {(long) ThreadLocalRandom.current().nextInt(0, 301), baseTime});
-				baseTime = baseTime - 10000;
+				baseTime = baseTime - input.getIntervalMs();
 			}
 			Collections.reverse(datapoints);
 			oneResponse.setDatapoints(datapoints);
