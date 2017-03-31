@@ -69,5 +69,13 @@ public class GrafanaQueryRange {
 	public void setRaw(GrafanaQueryRangeRaw r) {
 		this.raw = r;
 	}
+	
+	public long getfromUnixTimestamp() {
+		return this.fromUnixTimestamp;
+	}
+	
+	public long gettoUnixTimestamp() {
+		return this.toUnixTimestamp;
+	}
 
 }
