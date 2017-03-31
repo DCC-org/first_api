@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FirstApiApplication {
+public class DCCGrafanaAPI {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FirstApiApplication.class, args);
+		SpringApplication.run(DCCGrafanaAPI.class, args);
 	}
 }
