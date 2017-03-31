@@ -1,6 +1,7 @@
 package com.DCC.skarf.api.Grafana.Request.DataObjects.Query;
 
 import java.util.Date;
+import java.util.TimeZone;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -28,6 +29,10 @@ public class GrafanaQueryRange {
 	
 	private SimpleDateFormat format = 
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	
+	public GrafanaQueryRange() {
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+	}
 	
 	public String getFrom() {
 		return this.from;
