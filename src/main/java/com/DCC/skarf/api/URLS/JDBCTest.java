@@ -33,8 +33,8 @@ public class JDBCTest {
 		Connection con = null;
 		String url = "jdbc:postgresql://" + rhost +":" + lport + "/metrics";
 		Properties props = new Properties();
-		props.setProperty("user","metrics");
-		props.setProperty("password","thisISthePassword4711");
+		props.setProperty("user","api");
+		props.setProperty("password","O4VXZMoqFrBy7lt5p3Qj");
 		props.setProperty("ssl","false");
 		try {
 			con = DriverManager.getConnection(url, props);
@@ -45,7 +45,7 @@ public class JDBCTest {
 		
 		try {
 			Statement st = con.createStatement();
-			String sql = "SELECT * FROM public.measurement_master LIMIT 10";
+			String sql = "select api_select_search()";
 			ResultSet rs = st.executeQuery(sql);
 			con.close();
 			this.stopSSH();
