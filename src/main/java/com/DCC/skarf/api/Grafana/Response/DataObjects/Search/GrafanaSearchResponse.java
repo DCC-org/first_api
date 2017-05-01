@@ -1,5 +1,7 @@
 package com.DCC.skarf.api.Grafana.Response.DataObjects.Search;
 
+import com.DCC.skarf.api.Helper.JDBC.PostgresConnection;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -15,7 +17,8 @@ public class GrafanaSearchResponse {
 	}
 	
 	public String[] getDatapoints () {
-		return targets;
+		PostgresConnection db_connection = new PostgresConnection();
+		return db_connection.get_grafana_search_element();
 	}
 
 }
