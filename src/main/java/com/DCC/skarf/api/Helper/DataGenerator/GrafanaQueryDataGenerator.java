@@ -65,11 +65,23 @@ public class GrafanaQueryDataGenerator {
 				//Get target name as requested
 				String[] tmp = data.get(0);
 				oneResponse.setTarget(tmp[0]);
+				long baseTime = Long.parseLong(tmp[1]);
 				
 				List<long[]> datapoints = new ArrayList<long[]>();
 				for (String[] a_data : data)
 				{
-					datapoints.add(new long[] {(long) Double.parseDouble(a_data[2]), Long.parseLong(a_data[1])});
+					Long l_a_data = Long.parseLong(a_data[1]);
+					boolean run_generation = true;
+					while (run_generation)
+					{
+						if (baseTime <= l_a_data)
+						{
+							datapoints.add(new long[] {(long) Double.parseDouble(a_data[2]), baseTime});
+							baseTime = baseTime + input.getIntervalMs();
+						} else {
+							run_generation = false;
+						}
+					}
 				}
 				oneResponse.setDatapoints(datapoints);
 				

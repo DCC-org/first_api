@@ -31,7 +31,7 @@ public class GrafanaQueryRange {
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 	
 	public GrafanaQueryRange() {
-		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		format.setTimeZone(TimeZone.getTimeZone("UTC+1"));
 	}
 	
 	public String getFrom() {
