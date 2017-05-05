@@ -66,6 +66,31 @@ public class PostgresConnection {
 		}
 	
 	}
+	
+	public List<String[]> get_grafana_query_element(String s_plugin, String s_type_instance) {
+		this.startJDBC();
+		ResultSet rs = null;
+		List<String[]> output = new ArrayList<String[]>();
+		try {
+			Statement st = db_con.createStatement();
+			String sql = "select api_select_query_with_value('ci-slave2', '" + s_plugin + "', '" + s_type_instance + "', 1489745100, 1489746000)";
+			rs = st.executeQuery(sql);
+			this.stopJDBC();
+			while (rs.next())
+			{
+				try {
+					output.add(rs.getString(1).substring(1, (rs.getString(1).length()-1)).split(","));
+				} catch (SQLException e) {
+					System.out.println(e.toString());
+				}
+			}
+			return output;
+		} catch (SQLException e) {
+			this.stopJDBC();
+			System.out.println(e.toString());
+			return output;
+		}
+	}
 
 
 }

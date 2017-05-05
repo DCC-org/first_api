@@ -12,7 +12,7 @@ public class SSHTunnel {
     private String ssh_user = "postgres";
     private String ssh_host = "ci-slave2.virtapi.org";
     private int ssh_port = 22;
-    private String ssh_privatekey_path = "~/.ssh/id_rsa_postgres_tim";
+    private String ssh_privatekey_path = "C:\\Users\\Garfield\\.ssh\\id_rsa";
     private String ssh_password = "";
     
     public SSHTunnel() {
