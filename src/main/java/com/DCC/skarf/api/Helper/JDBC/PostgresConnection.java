@@ -13,12 +13,9 @@ import com.DCC.skarf.api.Helper.SSH.SSHTunnel;
 
 public class PostgresConnection {
 	
-	private SSHTunnel sshConnection = new SSHTunnel();
 	private Connection db_con = null;
 	
 	private void startJDBC() {
-		sshConnection.startSSHTunnel(); // System will stop if failed
-		
 		String url = "jdbc:postgresql://" + SSHTunnel.rhost +":" + SSHTunnel.lport + "/metrics";
 		Properties props = new Properties();
 		props.setProperty("user","api");
@@ -28,7 +25,6 @@ public class PostgresConnection {
 		try {
 			db_con = DriverManager.getConnection(url, props);
 		} catch (SQLException e) {
-			sshConnection.stopSSHTunnel();
 			System.out.println(e.toString());
 			System.exit(1);
 		}
@@ -38,11 +34,9 @@ public class PostgresConnection {
 		try {
 			db_con.close();
 		} catch (SQLException e) {
-			sshConnection.stopSSHTunnel();
 			System.out.println(e.toString());
 			System.exit(1);
 		}
-		sshConnection.stopSSHTunnel();
 	}
 	
 	public String[] get_grafana_search_element() {

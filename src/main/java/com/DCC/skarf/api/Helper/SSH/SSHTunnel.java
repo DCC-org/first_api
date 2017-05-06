@@ -1,9 +1,13 @@
 package com.DCC.skarf.api.Helper.SSH;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.context.annotation.Configuration;
+
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
-public class SSHTunnel {
+@Configuration
+public class SSHTunnel implements DisposableBean {
 		
 	public static final int lport = 8740;
 	public static final String rhost = "localhost";
@@ -16,10 +20,15 @@ public class SSHTunnel {
     private String ssh_password = "";
     
     public SSHTunnel() {
-    	// Nothing
+    	this.startSSHTunnel();
     }
 	
-	public boolean startSSHTunnel() {
+	@Override
+	public void destroy() throws Exception {
+		this.stopSSHTunnel();
+	}
+	
+	private boolean startSSHTunnel() {
         try
         {
 	        JSch jsch = new JSch();
@@ -39,15 +48,17 @@ public class SSHTunnel {
 	    }
 	    catch(Exception e)
         {
-	    	System.out.println(e.toString());
+	    	System.out.println("SSH Tunnel: " + e.toString());
 	    	System.exit(1);
 	    	return false;
 	    }
         
+        System.out.println("SSH Tunnel aktiv");
         return true;
 	}
 	
-	public void stopSSHTunnel() {
+	private void stopSSHTunnel() {
+		System.out.println("SSH Tunnel deaktiviert");
 		ssh_session.disconnect();
 	}
 	
