@@ -1,5 +1,7 @@
 package com.DCC.skarf.api.Helper.SSH;
 
+import java.io.File;
+
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,11 +27,9 @@ public class SSHTunnel implements DisposableBean {
     
     @Autowired
     public SSHTunnel(@Value("${ssh.privatekeylocation}") String pkpath) {
-    	
-    	if (pkpath.equals("") || pkpath.equals(null))
-    		pkpath = "geht_nicht";
     	this.ssh_private_path = pkpath;
-    	this.startSSHTunnel();
+    	if (new File(pkpath).exists())
+    		this.startSSHTunnel();
     }
 	
 	@Override
