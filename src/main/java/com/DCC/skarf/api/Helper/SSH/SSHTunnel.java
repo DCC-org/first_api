@@ -5,33 +5,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.DCC.skarf.api.Configuration.ConfigService;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
 @RestController
 public class SSHTunnel implements DisposableBean {
 	
-	@Autowired
-    ConfigService service = new ConfigService();
-		
 	public static final int lport = 8740;
 	public static final String rhost = "localhost";
 	public static final int rport = 5432;
-    private Session ssh_session;
+	private Session ssh_session;
     private String ssh_user = "postgres";
     private String ssh_host = "ci-slave2.virtapi.org";
     private int ssh_port = 22;
     //private String ssh_privatekey_path = "C:\\Users\\Garfield\\.ssh\\id_rsa";
     //private String ssh_privatekey_path = "~/.ssh/id_rsa_postgres_tim";
     private String ssh_password = "";
+    private String ssh_private_path;
     
-    @Value("${ssh.privatekeylocation}")
-    private String hallo;
-    
-    public SSHTunnel() {
-    	// hallo and service returns null
-    	System.out.println("Data: " + service.getSSHPrivatekeyPath() + " asd " + hallo);
+    @Autowired
+    public SSHTunnel(@Value("${ssh.privatekeylocation}") String pkpath) {
+    	
+    	if (pkpath.equals("") || pkpath.equals(null))
+    		pkpath = "geht_nicht";
+    	this.ssh_private_path = pkpath;
     	this.startSSHTunnel();
     }
 	
@@ -45,8 +42,7 @@ public class SSHTunnel implements DisposableBean {
         {
 	        JSch jsch = new JSch();
 	        // SSH Settings
-	        if (service.getSSHPrivatekeyPath() != "")
-	        	jsch.addIdentity(service.getSSHPrivatekeyPath());
+	        jsch.addIdentity(this.ssh_private_path);
 	        ssh_session = jsch.getSession(ssh_user, ssh_host, ssh_port);
 	        ssh_session.setConfig("StrictHostKeyChecking", "no");
 	        if (ssh_password != "")
