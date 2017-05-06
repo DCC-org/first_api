@@ -64,6 +64,8 @@ public class GrafanaQueryDataGenerator {
 					} else {
 						List<String[]> tmp_list = new ArrayList<String[]>();
 						tmp_list.add(new String[]{values, to_grafana_timestamp(s_array[0]), df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
+						//Add last request timestamp to list -> data will be generate till timerange end
+						tmp_list.add(new String[]{values, unixTo+"000", df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
 						data_values.add(tmp_list);
 						list_i++;
 					}
@@ -80,7 +82,7 @@ public class GrafanaQueryDataGenerator {
 				String[] tmp = data.get(0);
 				oneResponse.setTarget(tmp[0]);
 				long baseTime = Long.parseLong(tmp[1]);
-				
+								
 				List<long[]> datapoints = new ArrayList<long[]>();
 				for (String[] a_data : data)
 				{

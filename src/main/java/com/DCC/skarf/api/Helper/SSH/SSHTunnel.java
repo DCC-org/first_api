@@ -1,13 +1,19 @@
 package com.DCC.skarf.api.Helper.SSH;
 
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.DCC.skarf.api.Configuration.ConfigService;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
-@Configuration
+@RestController
 public class SSHTunnel implements DisposableBean {
+	
+	@Autowired
+    ConfigService service = new ConfigService();
 		
 	public static final int lport = 8740;
 	public static final String rhost = "localhost";
@@ -16,10 +22,16 @@ public class SSHTunnel implements DisposableBean {
     private String ssh_user = "postgres";
     private String ssh_host = "ci-slave2.virtapi.org";
     private int ssh_port = 22;
-    private String ssh_privatekey_path = "C:\\Users\\Garfield\\.ssh\\id_rsa";
+    //private String ssh_privatekey_path = "C:\\Users\\Garfield\\.ssh\\id_rsa";
+    //private String ssh_privatekey_path = "~/.ssh/id_rsa_postgres_tim";
     private String ssh_password = "";
     
+    @Value("${ssh.privatekeylocation}")
+    private String hallo;
+    
     public SSHTunnel() {
+    	// hallo and service returns null
+    	System.out.println("Data: " + service.getSSHPrivatekeyPath() + " asd " + hallo);
     	this.startSSHTunnel();
     }
 	
@@ -33,8 +45,8 @@ public class SSHTunnel implements DisposableBean {
         {
 	        JSch jsch = new JSch();
 	        // SSH Settings
-	        if (ssh_privatekey_path != "")
-	        	jsch.addIdentity(ssh_privatekey_path);
+	        if (service.getSSHPrivatekeyPath() != "")
+	        	jsch.addIdentity(service.getSSHPrivatekeyPath());
 	        ssh_session = jsch.getSession(ssh_user, ssh_host, ssh_port);
 	        ssh_session.setConfig("StrictHostKeyChecking", "no");
 	        if (ssh_password != "")
@@ -86,14 +98,6 @@ public class SSHTunnel implements DisposableBean {
 
 	public void setSsh_port(int ssh_port) {
 		this.ssh_port = ssh_port;
-	}
-
-	public String getSsh_privatekey_path() {
-		return ssh_privatekey_path;
-	}
-
-	public void setSsh_privatekey_path(String ssh_privatekey_path) {
-		this.ssh_privatekey_path = ssh_privatekey_path;
 	}
 
 	public String getSsh_password() {
