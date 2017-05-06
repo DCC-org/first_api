@@ -14,7 +14,7 @@ import io.swagger.util.Json;
 @Controller
 @RequestMapping("/search")
 public class GrafanaSearch {
-	
+
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = "application/json; charset=UTF-8")
 	public @ResponseBody String[] runSearch(@RequestBody GrafanaSearchRequest jsonString) {
 		System.out.println(Json.pretty(jsonString));

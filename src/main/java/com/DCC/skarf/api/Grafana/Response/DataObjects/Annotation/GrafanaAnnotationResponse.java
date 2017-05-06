@@ -5,22 +5,21 @@ import com.DCC.skarf.api.Grafana.Request.DataObjects.Annotation.GrafanaAnnotatio
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "Grafana Annotation Response",
-description = "Describes the Grafana Annotation Response Object")
+@ApiModel(value = "Grafana Annotation Response", description = "Describes the Grafana Annotation Response Object")
 public class GrafanaAnnotationResponse {
-	
+
 	@ApiModelProperty(position = 1)
 	private GrafanaAnnotationBase annotation = new GrafanaAnnotationBase();
-	
+
 	@ApiModelProperty(position = 2)
 	private String title = "Donlad trump is kinda funny";
-	
+
 	@ApiModelProperty(position = 3)
 	private long time = System.currentTimeMillis() - 120000;
-	
+
 	@ApiModelProperty(position = 3)
 	private String text = "It's me Mario";
-	
+
 	@ApiModelProperty(position = 4)
 	private String tags = "tag_mario";
 

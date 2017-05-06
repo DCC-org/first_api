@@ -12,16 +12,16 @@ import java.util.Properties;
 import com.DCC.skarf.api.Helper.SSH.SSHTunnel;
 
 public class PostgresConnection {
-	
+
 	private Connection db_con = null;
-	
+
 	private void startJDBC() {
-		String url = "jdbc:postgresql://" + SSHTunnel.rhost +":" + SSHTunnel.lport + "/metrics";
+		String url = "jdbc:postgresql://" + SSHTunnel.rhost + ":" + SSHTunnel.lport + "/metrics";
 		Properties props = new Properties();
-		props.setProperty("user","api");
-		props.setProperty("password","O4VXZMoqFrBy7lt5p3Qj");
-		props.setProperty("ssl","false");
-		
+		props.setProperty("user", "api");
+		props.setProperty("password", "O4VXZMoqFrBy7lt5p3Qj");
+		props.setProperty("ssl", "false");
+
 		try {
 			db_con = DriverManager.getConnection(url, props);
 		} catch (SQLException e) {
@@ -29,7 +29,7 @@ public class PostgresConnection {
 			System.exit(1);
 		}
 	}
-	
+
 	public void stopJDBC() {
 		try {
 			db_con.close();
@@ -38,9 +38,9 @@ public class PostgresConnection {
 			System.exit(1);
 		}
 	}
-	
+
 	public String[] get_grafana_search_element() {
-		
+
 		this.startJDBC();
 		ResultSet rs = null;
 		List<String> ResultString = new ArrayList<String>();
@@ -56,24 +56,25 @@ public class PostgresConnection {
 		} catch (SQLException e) {
 			this.stopJDBC();
 			System.out.println(e.toString());
-			return new String[] {"ERROR SELECT"};
+			return new String[] { "ERROR SELECT" };
 		}
-	
+
 	}
-	
-	public List<String[]> get_grafana_query_element(String s_plugin, String s_type_instance, String unixFrom, String unixTo) {
+
+	public List<String[]> get_grafana_query_element(String s_plugin, String s_type_instance, String unixFrom,
+			String unixTo) {
 		this.startJDBC();
 		ResultSet rs = null;
 		List<String[]> output = new ArrayList<String[]>();
 		try {
 			Statement st = db_con.createStatement();
-			String sql = "select api_select_query_with_value('ci-slave2', '" + s_plugin + "', '" + s_type_instance + "', "+unixFrom+", "+unixTo+")";
+			String sql = "select api_select_query_with_value('ci-slave2', '" + s_plugin + "', '" + s_type_instance
+					+ "', " + unixFrom + ", " + unixTo + ")";
 			rs = st.executeQuery(sql);
 			this.stopJDBC();
-			while (rs.next())
-			{
+			while (rs.next()) {
 				try {
-					output.add(rs.getString(1).substring(1, (rs.getString(1).length()-1)).split(","));
+					output.add(rs.getString(1).substring(1, (rs.getString(1).length() - 1)).split(","));
 				} catch (SQLException e) {
 					System.out.println(e.toString());
 				}
@@ -85,6 +86,5 @@ public class PostgresConnection {
 			return output;
 		}
 	}
-
 
 }

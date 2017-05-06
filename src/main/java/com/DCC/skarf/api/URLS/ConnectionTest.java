@@ -16,5 +16,4 @@ public class ConnectionTest {
 		return new ApiResponse(4, "Don't follow dreams, hunt goals");
 	}
 
-	
 }
