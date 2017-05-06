@@ -67,13 +67,13 @@ public class PostgresConnection {
 	
 	}
 	
-	public List<String[]> get_grafana_query_element(String s_plugin, String s_type_instance) {
+	public List<String[]> get_grafana_query_element(String s_plugin, String s_type_instance, String unixFrom, String unixTo) {
 		this.startJDBC();
 		ResultSet rs = null;
 		List<String[]> output = new ArrayList<String[]>();
 		try {
 			Statement st = db_con.createStatement();
-			String sql = "select api_select_query_with_value('ci-slave2', '" + s_plugin + "', '" + s_type_instance + "', 1489745100, 1489746000)";
+			String sql = "select api_select_query_with_value('ci-slave2', '" + s_plugin + "', '" + s_type_instance + "', "+unixFrom+", "+unixTo+")";
 			rs = st.executeQuery(sql);
 			this.stopJDBC();
 			while (rs.next())

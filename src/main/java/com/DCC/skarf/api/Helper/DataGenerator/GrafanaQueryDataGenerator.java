@@ -19,11 +19,25 @@ public class GrafanaQueryDataGenerator {
 		//Nothing
 	}
 	
+	public String to_grafana_timestamp(String ts) {
+		Long l = Long.parseLong(ts);
+		l = l - 3600; //1 Stunde
+		return (String.valueOf(l) + "000");
+	}
+	
 	public GrafanaQueryDataGenerator(GrafanaQueryRequest input) {
+		String unixFrom = String.valueOf(input.getRange().getfromUnixTimestamp());
+		String unixTo = String.valueOf(input.getRange().gettoUnixTimestamp());
+		unixFrom = unixFrom.substring(0, unixFrom.length()-3);
+		unixTo = unixTo.substring(0, unixTo.length()-3);
 		
 		for (GrafanaQueryTargets target : input.getTargets()) {
 			String[] select_options = target.getTarget().split("_");
-			List<String[]> output = this.db_connection.get_grafana_query_element(select_options[0], select_options[1]);
+			List<String[]> output = this.db_connection.get_grafana_query_element(
+					select_options[0],
+					select_options[1],
+					unixFrom,
+					unixTo);
 			List<List<String[]>> data_values = new ArrayList<List<String[]>>();
 			
 			int list_i = 0;
@@ -36,7 +50,7 @@ public class GrafanaQueryDataGenerator {
 				if (i == 0)
 				{
 					List<String[]> tmp_list = new ArrayList<String[]>();
-					tmp_list.add(new String[]{values, s_array[0] + "000", df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
+					tmp_list.add(new String[]{values, to_grafana_timestamp(s_array[0]), df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
 					data_values.add(tmp_list);
 				} else {
 					String[] s_array_davor = output.get((i-1));
@@ -45,11 +59,11 @@ public class GrafanaQueryDataGenerator {
 						s_array[3].equals(s_array_davor[3]))
 					{
 						List<String[]> tmp_list = data_values.get(list_i);
-						tmp_list.add(new String[]{values, s_array[0] + "000", df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
+						tmp_list.add(new String[]{values, to_grafana_timestamp(s_array[0]), df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
 						data_values.set(list_i, tmp_list);
 					} else {
 						List<String[]> tmp_list = new ArrayList<String[]>();
-						tmp_list.add(new String[]{values, s_array[0] + "000", df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
+						tmp_list.add(new String[]{values, to_grafana_timestamp(s_array[0]), df.format(Double.parseDouble(s_array[1])).toString().replace(',', '.')});
 						data_values.add(tmp_list);
 						list_i++;
 					}

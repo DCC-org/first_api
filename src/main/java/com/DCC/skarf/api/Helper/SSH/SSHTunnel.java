@@ -4,7 +4,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
 public class SSHTunnel {
-	
+		
 	public static final int lport = 8740;
 	public static final String rhost = "localhost";
 	public static final int rport = 5432;
