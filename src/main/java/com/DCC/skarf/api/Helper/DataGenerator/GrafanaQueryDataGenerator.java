@@ -3,6 +3,7 @@ package com.DCC.skarf.api.Helper.DataGenerator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import com.DCC.skarf.api.Grafana.Request.DataObjects.Query.GrafanaQueryRequest;
 import com.DCC.skarf.api.Grafana.Request.DataObjects.Query.GrafanaQueryTargets;
@@ -21,7 +22,12 @@ public class GrafanaQueryDataGenerator {
 
 	public String to_grafana_timestamp(String ts) {
 		Long l = Long.parseLong(ts);
-		l = l - 3600; // 1 Stunde
+		if (TimeZone.getDefault().inDaylightTime(new java.util.Date(Long.valueOf(ts)*1000)))
+		{
+			l = l - 7200; // 2 Stunden
+		} else {
+			l = l - 3600; // 1 Stunde
+		}
 		return (String.valueOf(l) + "000");
 	}
 
