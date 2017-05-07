@@ -31,7 +31,7 @@ public class GrafanaQueryDataGenerator {
 		return (String.valueOf(l) + "000");
 	}
 
-	public GrafanaQueryDataGenerator(GrafanaQueryRequest input) {
+	public GrafanaQueryDataGenerator(GrafanaQueryRequest input, int org_id) {
 		String unixFrom = String.valueOf(input.getRange().getfromUnixTimestamp());
 		String unixTo = String.valueOf(input.getRange().gettoUnixTimestamp());
 		unixFrom = unixFrom.substring(0, unixFrom.length() - 3);
@@ -39,7 +39,7 @@ public class GrafanaQueryDataGenerator {
 
 		for (GrafanaQueryTargets target : input.getTargets()) {
 			String[] select_options = target.getTarget().split("_");
-			List<String[]> output = this.db_connection.get_grafana_query_element(select_options[0], select_options[1],
+			List<String[]> output = this.db_connection.get_grafana_query_element(org_id, select_options[0], select_options[1],
 					unixFrom, unixTo);
 			List<List<String[]>> data_values = new ArrayList<List<String[]>>();
 
