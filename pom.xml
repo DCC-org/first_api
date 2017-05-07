@@ -5,7 +5,7 @@
 
 	<groupId>com.DCC.skarf.api</groupId>
 	<artifactId>DCC_API</artifactId>
-	<version>0.1.4</version>
+	<version>0.1.5</version>
 	<packaging>jar</packaging>
 
 	<name>first_api</name>
@@ -48,20 +48,11 @@
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-web</artifactId>
-		    <version>1.5.1.RELEASE</version>
 		</dependency>
 		<dependency>
 		    <groupId>io.springfox</groupId>
 		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>2.6.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-solr</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -72,6 +63,16 @@
 		    <artifactId>swagger-core</artifactId>
 		    <version>1.5.12</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.jcraft</groupId>
+		    <artifactId>jsch</artifactId>
+		    <version>0.1.54</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -81,6 +82,14 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<resources>
+	        <resource>
+	            <directory>src/main/java</directory>
+	        </resource>
+	        <resource>
+	            <directory>src/main/resources</directory>
+	        </resource>
+    	</resources>
 	</build>
 
 

@@ -17,7 +17,7 @@ import io.swagger.util.Json;
 @Controller
 @RequestMapping("/query")
 public class GrafanaQuery {
-	
+
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes = "application/json; charset=UTF-8")
 	public @ResponseBody List<GrafanaQueryResponse> runQuery(@RequestBody GrafanaQueryRequest jsonString) {
 		System.out.println(Json.pretty(jsonString));

@@ -12,27 +12,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {                                    
-    @Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)
-          .select()                                  
-          .apis(RequestHandlerSelectors.any())              
-          .paths(PathSelectors.any())                          
-          .build()
-          .apiInfo(this.apiInfo());
-    }
+public class SwaggerConfig {
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.any()).build().apiInfo(this.apiInfo());
+	}
 
 	private ApiInfo apiInfo() {
-	    @SuppressWarnings("deprecation")
-		ApiInfo apiInfo = new ApiInfo(
-	      "Sample REST API",
-	      "Prototype API for DCC Project",
-	      "API TOS",
-	      "Terms of service",
-	      "nikolai@luis.is",
-	      "License of API",
-	      "not yet");
-	    return apiInfo;
+		@SuppressWarnings("deprecation")
+		ApiInfo apiInfo = new ApiInfo("Sample REST API", "Prototype API for DCC Project", "API TOS", "Terms of service",
+				"nikolai@luis.is", "License of API", "not yet");
+		return apiInfo;
 	}
 }
